@@ -1,0 +1,15 @@
+{
+    "name": "dima/file_system",
+    "authors": [
+        {
+            "name": "DmitryVoronovLV",
+            "email": "vdmitryy@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Classes\\" : "private/classes"
+        }
+    }
+}
