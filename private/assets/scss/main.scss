@@ -10,13 +10,19 @@
         padding: 5px;
         margin: 2px 0;
         .spaces {
-            opacity: 0;
+            color: rgba($secondary, .3);
         }
         .main {
             width: 100%;
             display: grid;
-            grid-template-columns: 13fr 1fr 1fr 1fr;
+            grid-template-columns: 1fr 300px;
             justify-content: start;
+            .actions {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                grid-gap: 10px;
+                
+            }
         }
     }
 }

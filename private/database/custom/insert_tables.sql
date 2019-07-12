@@ -9,7 +9,7 @@ insert into topics (level, prev_id, title) values
 ('3', '7', 'Decided to stay here'),
 ('0', NULL, 'the way to the end of my life.'),
 ('2', '2', 'bla bla bla'),
-('1', '9',  'as I grew up living with my mom’s'),
+('1', '9',  'as I grew up living with my moms'),
 ('2', '11',  'friend and my friend. But there were a'),
 ('2', '11', 'Right now'),
 ('2', '2', 'lot of fights and I was very hyper'),
