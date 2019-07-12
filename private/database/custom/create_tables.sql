@@ -6,3 +6,9 @@ create table topics(
     created_at datetime not null default CURRENT_TIMESTAMP(),
     foreign key (prev_id) references topics(id)
 )
+
+create talbe users(
+    id primary key AUTO_INCREMENT not null,
+    username varchar(100) unique nut null,
+    hashed_password varchar(200) not null
+)
