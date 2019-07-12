@@ -1,3 +1,22 @@
-
+.topics {
+  background: rgba(248, 166, 166, 0.1);
+  padding: 5px;
+}
+.topics .topic {
+  display: flex;
+  flex-direction: row;
+  background: rgba(224, 131, 189, 0.1);
+  padding: 5px;
+  margin: 2px 0;
+}
+.topics .topic .spaces {
+  opacity: 0;
+}
+.topics .topic .main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 13fr 1fr 1fr 1fr;
+  justify-content: start;
+}
 
 /*# sourceMappingURL=main.css.map */

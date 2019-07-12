@@ -1,4 +1,24 @@
 $(document).ready(() => {
-    console.log($('body'));
-
+    var allObjs;
+    $.post('../private/ajax/getAllObjects.php', (data) => {
+        allObjs = JSON.parse(data);
+        
+        for (let obj of allObjs) {
+            let html = '';
+            // generate html code
+            html += '<div class="topic" id="' + obj.id + '">';
+            html += '<div class="spaces">';
+            for (let i = 0; i < obj.level; i++) html += '_____';
+            html += '</div><div class="main">';
+            html += '<div class="title">' + obj.title;
+            html += '</div><div class="id">' + obj.id;
+            html += '</div><div class="prev-id">' + obj.prev_id;
+            html += '</div><div class="level">' + obj.level;
+            html += '</div></div></div>'
+            // where to output
+            console.log(html);
+            if (obj.level == 0) $('.topics').append(html);
+            else $('#' + obj.prev_id).after(html);
+        }
+    });
 });

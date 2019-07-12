@@ -1,8 +1,13 @@
 <?php 
 namespace Classes;
 
-class Topic extends db_object {
+class Topic extends DBobj {
     protected static $db_table = 'topics';
-    protected $PK = 'id';
+    protected $PK = ['id'];
     protected $fields = ['level','prev_id','title'];
+
+    public $id;
+    public $level;
+    public $prev_id;
+    public $title;
 }

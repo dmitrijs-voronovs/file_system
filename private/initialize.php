@@ -12,5 +12,7 @@ include_once(PRIVATE_PATH . '/db_credentials.php');
 
 include_once(ROOT_PATH . '/vendor/autoload.php');
 
+session_start();
+
 $db = database_connect();
 Classes\DBobj::set_database($db);
