@@ -3,26 +3,67 @@
 .topics {
     background: rgba($main, .1);
     padding: 5px;
+    border-radius: $border-rad;
     .topic {
+        border-radius: $border-rad;
         display: flex;
         flex-direction: row;
         background: rgba($secondary, .1);
         padding: 5px;
-        margin: 2px 0;
+        margin: 4px 0;
         .spaces {
             color: rgba($secondary, .3);
         }
         .main {
             width: 100%;
             display: grid;
-            grid-template-columns: 1fr 300px;
+            grid-template-columns: 1fr 101px;
             justify-content: start;
+            .title {
+                display: flex;
+                * {
+                    padding: 5px;
+                }
+                .info {
+                    background: rgba($secondary, .3);
+                    // padding: 5px;
+                    margin: 0 5px 0 0;
+                    border-radius: $border-rad;
+                }
+            }
             .actions {
                 display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                grid-gap: 10px;
-                
+                grid-template-columns: repeat(3, 1fr);
             }
         }
+    }
+}
+
+button {
+    border: 0;
+    background: rgba($secondary, .3);
+    padding: 5px;
+    margin: 0;
+    border-radius: $border-rad;
+    width: 28px;
+    i {
+        padding: 0;
+        margin: 0;
+        &[class="fas fa-times"] {
+            padding-top: 3px;
+        }
+    }
+}
+
+form {
+    display: flex;
+    padding: 5px;    
+    border-radius: $border-rad;
+    background: rgba($main, .3);
+    align-items: center;
+    justify-content: center;
+
+    .form-group {
+        padding: 5px;
     }
 }
