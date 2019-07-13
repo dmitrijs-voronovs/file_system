@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июл 12 2019 г., 14:48
--- Версия сервера: 5.7.26
--- Версия PHP: 7.3.5
+-- Время создания: Июл 13 2019 г., 22:22
+-- Версия сервера: 5.7.24
+-- Версия PHP: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -17,6 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
+
+--
+-- База данных: `fsystem`
+--
 
 -- --------------------------------------------------------
 
@@ -30,35 +34,67 @@ CREATE TABLE IF NOT EXISTS `topics` (
   `level` int(11) NOT NULL DEFAULT '0',
   `prev_id` int(11) DEFAULT NULL,
   `title` varchar(200) NOT NULL,
+  `description` varchar(500) NOT NULL DEFAULT 'This is some boring default description for this very topic',
+  `user_id` int(11) NOT NULL DEFAULT '1',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `prev_id` (`prev_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+  KEY `prev_id` (`prev_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `topics`
 --
 
-INSERT INTO `topics` (`id`, `level`, `prev_id`, `title`, `created_at`) VALUES
-(1, 0, NULL, 'Me and Friends', '2019-07-12 17:45:46'),
-(2, 1, 1, 'This explains the beginning of my life all', '2019-07-12 17:45:46'),
-(3, 0, NULL, 'Another one', '2019-07-12 17:45:46'),
-(4, 1, 2, 'What is it', '2019-07-12 17:45:46'),
-(5, 1, 3, 'My life from the beginning was very fun', '2019-07-12 17:45:46'),
-(6, 1, 3, 'Why am i that good', '2019-07-12 17:45:46'),
-(7, 2, 5, 'In order to go', '2019-07-12 17:45:46'),
-(8, 3, 7, 'Decided to stay here', '2019-07-12 17:45:46'),
-(9, 0, NULL, 'the way to the end of my life.', '2019-07-12 17:45:46'),
-(10, 2, 2, 'bla bla bla', '2019-07-12 17:45:46'),
-(11, 1, 9, 'as I grew up living with my moms', '2019-07-12 17:45:46'),
-(12, 2, 11, 'friend and my friend. But there were a', '2019-07-12 17:45:46'),
-(13, 2, 11, 'Right now', '2019-07-12 17:45:46'),
-(14, 2, 2, 'lot of fights and I was very hyper', '2019-07-12 17:45:46'),
-(15, 1, 3, 'Maybe another', '2019-07-12 17:45:46'),
-(16, 2, 6, 'back then. I have ADHD so back then', '2019-07-12 17:45:46'),
-(17, 2, 5, 'when I was little; I was very hyper', '2019-07-12 17:45:46'),
-(18, 0, NULL, 'What was it', '2019-07-12 17:45:46'),
-(19, 1, 18, 'and would not stop moving around the place. I', '2019-07-12 17:45:46');
+INSERT INTO `topics` (`id`, `level`, `prev_id`, `title`, `description`, `user_id`, `created_at`) VALUES
+(1, 0, NULL, 'Me and Friends', 'another one', 1, '2019-07-14 00:55:53'),
+(2, 1, 1, 'This explains the beginning of my life all', 'This is some boring default description for this very topic', 2, '2019-07-14 00:55:53'),
+(3, 0, NULL, 'Another one', 'This is some boring default description for this very topic', 3, '2019-07-14 00:55:53'),
+(4, 1, 2, 'What is it', 'This is some boring default description for this very topic', 2, '2019-07-14 00:55:53'),
+(5, 1, 3, 'My life from the beginning was very fun', 'This is some boring default description for this very topic', 2, '2019-07-14 00:55:53'),
+(6, 1, 3, 'Why am i that good', 'helo', 1, '2019-07-14 00:55:53'),
+(21, 3, 14, 'another you', 'another me', 1, '2019-07-14 01:17:29'),
+(7, 2, 5, 'In order to go', 'change me, please', 2, '2019-07-14 00:55:53'),
+(8, 3, 7, 'Decided to stay here', 'This is some boring default description for this very topic', 1, '2019-07-14 00:55:53'),
+(9, 0, NULL, 'the way to the end of my life.', 'This is some boring default description for this very topic', 1, '2019-07-14 00:55:53'),
+(10, 2, 2, 'bla bla bla', 'This is some boring default description for this very topic', 1, '2019-07-14 00:55:53'),
+(11, 1, 9, 'as I grew up living with my moms', 'This is some boring default description for this very topic', 2, '2019-07-14 00:55:53'),
+(12, 2, 11, 'friend and my friend. But there were a', 'This is some boring default description for this very topic', 3, '2019-07-14 00:55:53'),
+(13, 2, 11, 'Right now', 'This is some boring default description for this very topic', 1, '2019-07-14 00:55:53'),
+(14, 2, 2, 'lot of fights and I was very hyper', 'This is some boring default description for this very topic', 1, '2019-07-14 00:55:53'),
+(15, 1, 3, 'Maybe another', 'This is some boring default description for this very topic', 2, '2019-07-14 00:55:53'),
+(16, 2, 6, 'back then. I have ADHD so back then', 'This is some boring default description for this very topic', 1, '2019-07-14 00:55:53'),
+(17, 2, 5, 'when I was little; I was very hyper', 'This is some boring default description for this very topic', 3, '2019-07-14 00:55:53'),
+(18, 0, NULL, 'What was it', 'This is some boring default description for this very topic', 1, '2019-07-14 00:55:53'),
+(19, 1, 18, 'and would not stop moving around the place. I', 'This is some boring default description for this very topic', 3, '2019-07-14 00:55:53'),
+(22, 0, NULL, 'totally new topic', 'as you ca nsess', 1, '2019-07-14 01:17:57'),
+(23, 1, 22, 'and now from boss account', 'yee', 2, '2019-07-14 01:18:22'),
+(24, 2, 23, 'anoce again', 'aaa', 2, '2019-07-14 01:18:32'),
+(25, 2, 23, 'beautiful', 'woohoo', 2, '2019-07-14 01:18:42');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `hashed_password` varchar(60) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `hashed_password`) VALUES
+(1, 'dima', '$2y$10$AaRRT.bkxszqRyh9ShpnQuaYrEjM1HXOvG/Gd8r4JG0f5U6txOspi'),
+(2, 'boss', '$2y$10$AaRRT.bkxszqRyh9ShpnQuaYrEjM1HXOvG/Gd8r4JG0f5U6txOspi'),
+(3, 'user123', '$2y$10$AaRRT.bkxszqRyh9ShpnQuaYrEjM1HXOvG/Gd8r4JG0f5U6txOspi');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
