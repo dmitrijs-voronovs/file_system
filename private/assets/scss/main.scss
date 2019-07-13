@@ -66,4 +66,11 @@ form {
     .form-group {
         padding: 5px;
     }
+
+    input {
+        border-radius: $border-rad;
+        border: 0;
+        padding: 5px;
+        background: rgba($secondary, .5);
+    }
 }

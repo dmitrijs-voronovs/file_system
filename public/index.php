@@ -5,12 +5,11 @@
     include_once(SHARED_PATH . '/header.php');
 
     if(is_post_request()) {
-        $topic = $_POST["topics"];
-        var_dump($topic);
+        $bad_topic = $_POST["topics"];
         // sanitize values 
-        $topicObj = new Classes\Topic($topic);
-        $topicObj->save();
-        var_dump($topicObj);
+        $topic = Classes\Topic::sanitize_all($bad_topic);
+        // check action (create or update)
+        $topicObj = Classes\Topic::update_or_create($topic);
     };
 ?>
 
@@ -21,7 +20,6 @@
 <main>
     <?php echo Classes\Topic::get_form(); ?>
 
-    id + prev_id + level + title
     <div class="topics">
     </div>
 

@@ -63,5 +63,11 @@ form {
 form .form-group {
   padding: 5px;
 }
+form input {
+  border-radius: 5px;
+  border: 0;
+  padding: 5px;
+  background: rgba(224, 131, 189, 0.5);
+}
 
 /*# sourceMappingURL=main.css.map */
