@@ -9,3 +9,15 @@
     <script src="https://kit.fontawesome.com/0938627de3.js"></script>
 </head>
 <body>
+    <header>
+        <nav>
+            <ul>
+                <?php if(!Classes\User::is_logged()) echo'
+                <li><a href="register.php">register</a></li>
+                <li><a href="login.php">login</a></li>';
+                else echo'
+                <li><a href="logout.php">logout</a></li>
+                <li><a href="index.php">index</a></li>'; ?>
+            </ul>
+        </nav>    
+    </header>

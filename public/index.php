@@ -1,7 +1,9 @@
 <?php 
     include_once('../private/initialize.php');
-    $title = "main page";
-    
+
+    requires_login();
+
+    $title = "Topics";
     include_once(SHARED_PATH . '/header.php');
 
     if(is_post_request()) {
@@ -10,23 +12,17 @@
         $topic = Classes\Topic::sanitize_all($bad_topic);
         // check action (create or update)
         $topicObj = Classes\Topic::update_or_create($topic);
-    };
+    };   
+    // echo Classes\User::getLoggedUser()->id;
 ?>
-
-<header>
-    <h1>topics</h1>
-</header>
-
+    
 <main>
+    <h1>topics</h1>
     <?php echo Classes\Topic::get_form(); ?>
 
     <div class="topics">
     </div>
 
 </main>
-
-<footer>
-    <h3 class="author">Made by Dmitrijs Voronovs</h3>
-</footer>
 
 <?php include_once(SHARED_PATH . '/footer.php'); ?>

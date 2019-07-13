@@ -18,26 +18,27 @@ class DBobj {
         }
     }
 
-    public function save($args = [])
+    public function save($exclude = [])
     {
         if(isset($this->{static::$PK}) && !empty($this->{static::$PK})){
-            $this->update();
+            return $this->update();
         } else {
-            $this->create();
+            return $this->create($exclude);
         }
     }
 
-    public function create()
+    public function create($exclude = [])
     {
-        $sql = "INSERT INTO ". static::$db_table ." (". join(",",static::$fields);
+        $fields = array_diff(static::$fields, $exclude); 
+        $sql = "INSERT INTO ". static::$db_table ." (". join(",",$fields);
         $sql .= ") VALUES (";
-        foreach(static::$fields as $i => $field){
+        foreach($fields as $i => $field){
             if(empty($this->$field)){
                 $sql.= "DEFAULT";
             } else {
                 $sql.= "'". $this->$field ."'";
             }
-            if($i+1 != sizeof(static::$fields)) $sql.=',';
+            if($i+1 != sizeof($fields)) $sql.=',';
             else $sql.= ');';
         }
         return static::db_query($sql);
@@ -54,7 +55,6 @@ class DBobj {
             }
         }
         $sql .= " WHERE ". static::$PK ." = '". $this->{static::$PK} ."';";
-        // echo $sql;
         return static::find_by_PK(static::db_query($sql));
     }
 
@@ -67,7 +67,7 @@ class DBobj {
     {
         $result = self::$database->query($sql);
         if(self::$database->errno) {
-            exit('Query failed');
+            exit('Query failed : ' . self::$database->error);
         }
         return $result;
     }
@@ -88,7 +88,7 @@ class DBobj {
         return $args;
     }
 
-    public static function find_all($orderClause)
+    public static function find_all($orderClause = '')
     {
         $sql = 'SELECT * FROM '. static::$db_table .' '.$orderClause .';';
         $objs = [];
@@ -128,10 +128,10 @@ class DBobj {
         return static::db_query($sql);
     }
 
-    public static function get_form($values = [], $includePK = false)
+    public static function get_form($values = [], $includePK = false, $action = "index.php")
     {
         $form = '
-        <form action="index.php" method="POST">';
+        <form action='. $action .' method="POST">';
             foreach(static::$form_fields as $i => $field){
                 $val = $values[$field] ?? "";
                 $form .= 
@@ -158,7 +158,6 @@ class DBobj {
             <div class="form-group">
                 <button type="submit"><i class="fas fa-check"></i></button>
             </div></form>';
-        // return var_dump($values);
         return $form;
     }
 }

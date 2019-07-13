@@ -12,3 +12,15 @@ function h($str)
     $str = htmlspecialchars($str);
     return $str;
 }
+
+function redirect_to($path)
+{
+    header('Location: '.$path);
+}
+
+function requires_login()
+{
+    if (!isset($_SESSION['username'])){
+        redirect_to('login.php');
+    }
+}

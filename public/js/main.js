@@ -10,7 +10,7 @@ function generateHTMLforOneElement(obj){
     // generate html code
     html += '<div class="topic" id="' + obj.id + '" level="' + obj.level + '">';
     html += '<div class="spaces">';
-    for (let i = 0; i < obj.level; i++) html += '_____';
+    for (let i = 0; i < obj.level; i++) html += 'o_____';
     html += '</div><div class="main">';
     html += '<div class="title"><div class="info">' + obj.id + ' | ' + obj.prev_id + ' | ' + obj.level + '</div>';
     html += '<div class="text">'+ obj.title +'</div>';
