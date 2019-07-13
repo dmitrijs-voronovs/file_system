@@ -8,6 +8,7 @@ class Topic extends DBobj {
     protected static $form_fields = ['title'];
     protected static $form_fields_type = ['text'];
     protected static $form_hidden_fields = ['level','prev_id'];
+    // datetime field created_at
 
     public $id;
     public $level;

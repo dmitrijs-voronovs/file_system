@@ -1,8 +1,26 @@
 $(document).ready(() => {
     loadElements();
+    $('input').focus();
 });
 
 let latestAddedInput;
+
+function generateHTMLforOneElement(obj){
+    let html = '';
+    // generate html code
+    html += '<div class="topic" id="' + obj.id + '" level="' + obj.level + '">';
+    html += '<div class="spaces">';
+    for (let i = 0; i < obj.level; i++) html += '_____';
+    html += '</div><div class="main">';
+    html += '<div class="title"><div class="info">' + obj.id + ' | ' + obj.prev_id + ' | ' + obj.level + '</div>';
+    html += '<div class="text">'+ obj.title +'</div>';
+    html += '</div><div class="actions">';
+    html += '<button onclick="append(this)"><i class="fas fa-plus"></i></button>';
+    html += '<button onclick="edit(this)"><i class="fas fa-pen"></i></button>';
+    html += '<button onclick="deleteTopic(this)"><i class="fas fa-times"></i></button>';
+    html += '</div ></div>';
+    return html;
+}
 
 function loadElements(){
     var allObjs;
@@ -10,19 +28,7 @@ function loadElements(){
         allObjs = JSON.parse(data);
         
         for (let obj of allObjs) {
-            let html = '';
-            // generate html code
-            html += '<div class="topic" id="' + obj.id + '" level="' + obj.level + '">';
-            html += '<div class="spaces">';
-            for (let i = 0; i < obj.level; i++) html += '_____';
-            html += '</div><div class="main">';
-            html += '<div class="title"><div class="info">' + obj.id + ' | ' + obj.prev_id + ' | ' + obj.level + '</div>';
-            html += '<div class="text">'+ obj.title +'</div>';
-            html += '</div><div class="actions">';
-            html += '<button onclick="append(this)"><i class="fas fa-plus"></i></button>';
-            html += '<button onclick="edit(this)"><i class="fas fa-pen"></i></button>';
-            html += '<button onclick="deleteTopic(this)"><i class="fas fa-times"></i></button>';
-            html += '</div ></div>';
+            let html = generateHTMLforOneElement(obj);
             // where to output
             if (obj.level == 0) $('.topics').append(html);
             else $('#' + obj.prev_id).after(html);
@@ -93,7 +99,6 @@ function deleteTopic(el) {
     $parent = $(el).parent().parent().parent();
     let parentID = parseInt($parent.attr('id'));
     let IDs = findAllChildren(parentID);
-    console.log(IDs);
     IDs.push(parentID);
     $.ajax({
         type: "POST",

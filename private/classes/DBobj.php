@@ -88,9 +88,9 @@ class DBobj {
         return $args;
     }
 
-    public static function find_all()
+    public static function find_all($orderClause)
     {
-        $sql = 'SELECT * FROM '. static::$db_table .' ORDER BY level ASC;';
+        $sql = 'SELECT * FROM '. static::$db_table .' '.$orderClause .';';
         $objs = [];
         $query = static::db_query($sql);
         while($obj = $query->fetch_assoc()){
