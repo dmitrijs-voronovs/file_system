@@ -1,6 +1,6 @@
 $(document).ready(() => {
     loadElements();
-    $('input').focus();
+    $('input')[0].focus();
 });
 
 let latestAddedInput;
@@ -12,8 +12,10 @@ function generateHTMLforOneElement(obj){
     html += '<div class="spaces">';
     for (let i = 0; i < obj.level; i++) html += 'o_____';
     html += '</div><div class="main">';
-    html += '<div class="title"><div class="info">' + obj.id + ' | ' + obj.prev_id + ' | ' + obj.level + '</div>';
-    html += '<div class="text">'+ obj.title +'</div>';
+    // html += '<div class="title"><div class="info">' + obj.id + ' | ' + obj.prev_id + ' | ' + obj.level + ' | ' + obj.username + '</div>';
+    html += '<div class="title"><div class="info">' + obj.username + '</div>';
+    html += '<div class="text">'+ obj.title + '</div>';
+    html += '<div class="desc">'+ obj.description + '</div>';
     html += '</div><div class="actions">';
     html += '<button onclick="append(this)"><i class="fas fa-plus"></i></button>';
     html += '<button onclick="edit(this)"><i class="fas fa-pen"></i></button>';
@@ -53,7 +55,7 @@ function append(el) {
             $parent.after(data);
             if(latestAddedInput) latestAddedInput.remove();
             latestAddedInput = $parent.next();
-            latestAddedInput.find('input').focus();
+            latestAddedInput.find('input')[0].focus();
         }
     });
 }
@@ -63,13 +65,15 @@ function edit(el) {
     $parent = $(el).parent().parent().parent();
     let parentId = parseInt($parent.attr('id'));
     let parentTitle = $parent.find('.text').text();
+    let parentDesc = $parent.find('.desc').text();
     $.ajax({
         type: "POST",
         url: '../private/ajax/getTopicsForm.php',
         data: {
             topics: {
                 id: parentId,
-                title: parentTitle
+                title: parentTitle,
+                description: parentDesc
             },
             include_pk: true
         },
@@ -77,7 +81,7 @@ function edit(el) {
             $parent.after(data);
             if(latestAddedInput) latestAddedInput.remove();
             latestAddedInput = $parent.next();
-            latestAddedInput.find('input').focus();
+            latestAddedInput.find('input')[0].focus();
         }
     });
 }

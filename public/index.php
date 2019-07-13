@@ -10,10 +10,10 @@
         $bad_topic = $_POST["topics"];
         // sanitize values 
         $topic = Classes\Topic::sanitize_all($bad_topic);
+        $topic["user_id"] = Classes\User::getLoggedUser()->id;
         // check action (create or update)
         $topicObj = Classes\Topic::update_or_create($topic);
-    };   
-    // echo Classes\User::getLoggedUser()->id;
+    };
 ?>
     
 <main>

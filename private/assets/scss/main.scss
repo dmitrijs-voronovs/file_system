@@ -73,12 +73,16 @@ header {
                 display: flex;
                 * {
                     padding: 5px;
+                    border-radius: $border-rad;
                 }
                 .info {
                     background: rgba($secondary, .3);
                     // padding: 5px;
                     margin: 0 5px 0 0;
                     border-radius: $border-rad;
+                }
+                .text {
+                    background: rgba($secondary, .5);
                 }
             }
             .actions {
