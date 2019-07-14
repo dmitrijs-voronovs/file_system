@@ -20,7 +20,7 @@ function redirect_to($path)
 
 function requires_login()
 {
-    if (!isset($_SESSION['username'])){
+    if (!(isset($_SESSION['username']) && isset($_SESSION['user_id']))){
         redirect_to('login.php');
     }
 }

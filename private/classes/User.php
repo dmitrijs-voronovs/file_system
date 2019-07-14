@@ -84,7 +84,7 @@ class User extends DBobj {
     {
         if($this->validate_for_login()){
             $_SESSION['username'] = $this->username;
-            $_SESSION['id'] = static::find_by_username($this->username)->id;
+            $_SESSION['user_id'] = static::find_by_username($this->username)->id;
             redirect_to('index');
         } 
         return false;
@@ -92,7 +92,7 @@ class User extends DBobj {
 
     public static function is_logged()
     {
-        return(isset($_SESSION['username']));
+        return(isset($_SESSION['username']) && isset($_SESSION['user_id']));
     }
 
     public static function getLoggedUser()
