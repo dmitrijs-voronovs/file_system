@@ -15,4 +15,4 @@
 
 ## Notes
 * Composer for Classes autoloading
-* Npm for scss + browserSync + gulp configuration
+* Npm for jquery and scss + browserSync + gulp configuration
