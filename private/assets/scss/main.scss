@@ -27,17 +27,32 @@ header {
             padding: 0;
             display: flex;
             justify-content: center;
-            li a {
-                font-weight: bold;
-                text-decoration: none;
-                border: solid 1px rgba($main,.2);
-                background: rgba($main,.2);
-                border-radius: 0 0 $border-rad*2 $border-rad*2;
-                padding: 10px;
-                margin: 0 5px;
-                color: $text;
-                &:visited {
+            li {
+                a {
+                    font-weight: bold;
+                    text-decoration: none;
+                    border: solid 1px rgba($main,.2);
+                    background: rgba($main,.2);
+                    border-radius: 0 0 $border-rad*2 $border-rad*2;
+                    padding: 10px;
+                    margin: 0 5px;
                     color: $text;
+                    padding-top: 25px;
+                    transition: .5s;
+                    &:visited {
+                        color: $text;
+                    }
+                }
+                transition: .5s;
+                
+                &:hover {
+                    transform: translateY(15px);
+                    transition: .5s;
+                    a {
+                        
+                        transition: .5s;
+                        background: rgba($main,.4);
+                    }
                 }
             }
         }
@@ -49,8 +64,6 @@ header {
 
 .topics {
     margin-top:10px;
-    // background: rgba($main, .1);
-    // padding: 5px;
     border-radius: $border-rad;
     .topic {
         border-radius: $border-rad;
@@ -59,6 +72,11 @@ header {
         background: rgba($secondary, .1);
         padding: 5px;
         margin: 4px 0;
+        transition: .3s;
+        &:hover {
+            transition: .3s;
+            background: rgba($secondary, .2);
+        }
         .spaces {
             color: rgba($secondary, .3);
         }
@@ -98,6 +116,7 @@ button {
     margin: 0;
     border-radius: $border-rad;
     width: 28px;
+    transition: .3s;
     i {
         padding: 0;
         margin: 0;
@@ -105,6 +124,10 @@ button {
         &[class="fas fa-times"] {
             padding-top: 3px;
         }
+    }
+    &:hover {
+        transition: .3s;
+        background: rgba($secondary, .6);
     }
 }
 
@@ -125,6 +148,12 @@ form, .errors {
         border: 0;
         padding: 5px;
         background: rgba($secondary, .5);
+        transition: .3s;
+        
+        &:hover {
+            transition: .3s;
+            background: rgba($secondary, .8);
+        }
     }
 }
 

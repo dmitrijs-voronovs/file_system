@@ -11,15 +11,28 @@ class User extends DBobj {
 
     public $id;
     public $username;
-    public $password;    
-    public $password_repeat;
+    
+    /**
+     * Two following fields are stored internally,
+     * are not saved to database.
+     */
+    protected $password;    
+    protected $password_repeat;
+
+    /** 
+     * @var string 60char string for password, 
+     * that is being send to database.
+     */
     protected $hashed_password;
     protected $errors = [];
 
     public function create($exclude = [])
     {
         if ($this->validate()){
+            // generate $this->hashed_password before sending to db
             $this->hashed_password = password_hash($this->password, PASSWORD_BCRYPT);
+            // saves object to db excluding two password fields, as
+            // plain text passwords should not be stored in db
             $result = parent::create(['password','password_repeat']);
             $this->id = static::find_by_username($this->username)->id;
             return $result;
@@ -27,6 +40,7 @@ class User extends DBobj {
         return false;
     }
 
+    /** for user registration */
     protected function validate()
     {
         $this->errors = [];
@@ -46,6 +60,7 @@ class User extends DBobj {
         return true;
     }
 
+    /** for login */
     protected function validate_for_login()
     {
         $this->errors = [];
@@ -119,6 +134,8 @@ class User extends DBobj {
 
     public static function get_login_form($values = [], $includePK = false, $action = "login.php")
     {
+        // Trick, that allows us to use parent form generation
+        // method. Exclude some fileds and then include them back.
         $fields = static::$form_fields;
         static::$form_fields = ['username','password'];
         $html = parent::get_form($values, $includePK, $action);

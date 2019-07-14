@@ -8,7 +8,7 @@ class Topic extends DBobj {
     protected static $form_fields = ['title','description'];
     protected static $form_fields_type = ['text','text'];
     protected static $form_hidden_fields = ['level','prev_id','user_id'];
-    // datetime field created_at
+    /** datetime field created_at */
 
     public $id;
     public $level;
@@ -17,7 +17,7 @@ class Topic extends DBobj {
     public $description;
     public $user_id;
     
-    // for convenience
+    /** for convenience */
     public $username;
 
     public function __construct($args)

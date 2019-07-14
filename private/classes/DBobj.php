@@ -1,12 +1,35 @@
 <?php 
 namespace Classes;
 
+/**
+ * This is a universal class, representing database object.
+ * Provides basic functionality, according to active-record
+ * pattern. 
+ * Instantiates objects, find objects in database, 
+ * saves and updates objects in db, generates forms for users.
+ */
 class DBobj {
-    protected static $db_table;
+
+    /**
+     * Used by all children objects to communicate with
+     * database.
+     * @var mysqli
+     */
     protected static $database;
+
+    /**
+     * Name of the table in database
+     * @var string
+     */
+    protected static $db_table;
     protected static $PK;
     protected static $fields = [];
-    protected static $form_fields = [];    
+    protected static $form_fields = [];  
+
+    /**
+     * Input types, e.g. ["text","number","password"]
+     * @var string[]
+     */
     protected static $form_fieds_type = [];
     protected static $form_hidden_fields = [];
     
@@ -18,6 +41,14 @@ class DBobj {
         }
     }
 
+    /**
+     * Saves or updates object in database.
+     *
+     * @param  string[] $exclude fields, that should
+     * not be sent to database
+     *
+     * @return DBobj|false
+     */
     public function save($exclude = [])
     {
         if(isset($this->{static::$PK}) && !empty($this->{static::$PK})){
@@ -27,6 +58,13 @@ class DBobj {
         }
     }
 
+    /** 
+     * Saves object to database
+     *
+     * @param  string[] $exclude
+     *
+     * @return DBobj|false
+     */
     public function create($exclude = [])
     {
         $fields = array_diff(static::$fields, $exclude); 
@@ -44,6 +82,13 @@ class DBobj {
         return static::db_query($sql);
     }
     
+    /** 
+     * Updates object in database
+     *
+     * @param  string[] $exclude
+     *
+     * @return DBobj|false
+     */
     public function update()
     {
         $sql = "UPDATE ". static::$db_table ." SET ";
@@ -63,6 +108,14 @@ class DBobj {
         self::$database = $db;
     }
 
+    /**
+     * All queries should be made through this method.
+     * Prints errors in canse of fault.
+     *
+     * @param  string $sql
+     *
+     * @return Object|null
+     */
     protected static function db_query($sql)
     {
         $result = self::$database->query($sql);

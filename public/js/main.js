@@ -61,7 +61,6 @@ function append(el) {
 }
 
 function edit(el) {
-    // alert($(el).attr('onclick'));
     $parent = $(el).parent().parent().parent();
     let parentId = parseInt($parent.attr('id'));
     let parentTitle = $parent.find('.text').text();
